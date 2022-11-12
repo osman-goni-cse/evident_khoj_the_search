@@ -1,7 +1,12 @@
 import json
 from django.shortcuts import render
 from home_page_app.models import StoreNumber
- 
+from home_page_app.serializers import StoreNumberSerializer
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+import datetime
+from django.contrib.auth.models import User
+
 def BinarySearch(numberList, target):  
   low = 0  
   high = len(numberList) - 1  
@@ -51,3 +56,31 @@ def home_page_view(request):
 
 
   return render(request, 'home.html', context={'result':None})
+
+
+@api_view(['GET'])
+def getRoutes(request):
+  routes = [  
+    {  
+    'Endpoint': '/notes/',  
+    'method': 'GET',  
+    'body': None,  
+    'description': 'Returns an array of notes'  
+    },
+  ]
+  return Response(routes)
+
+
+@api_view(['GET'])
+def notesList(request, user_id):
+  print(start_datetime)
+  user = User.objects.get(id=user_id)
+  numberList = StoreNumber.objects.filter(
+    user=user,
+    timestamp__gte=datetime.datetime(start_datetime),
+    timestamp__lte=datetime.datetime(end_datetime)
+
+  )
+
+  serializer = StoreNumberSerializer(numberList, many=True)
+  return Response(serializer.data) 

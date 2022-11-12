@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     'registration',
     'home_page_app',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
