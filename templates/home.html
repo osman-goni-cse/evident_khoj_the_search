@@ -6,6 +6,29 @@
 
 {% block content %}
 
-  
+  <div class="container">
+    
+    <form action="" method="POST" class="w-50 mx-auto mt-3"> 
+      {% csrf_token %} 
+      <label for="numberList">Input Values</label>
+      <input type="text" name="numberList" id="" class="form-control" required>
+      <label for="search_value">Search Value</label>
+      <input type="number" name="search_value" id="" class="form-control " required>
+      <input class="btn btn-primary mt-2 mx-auto" type="submit" value="Khoj">
+
+      <div>
+        <strong>Result: <span id="result">
+          {% if result == -1 %}
+            False
+          {% elif result >= 0%}
+            True
+          {% endif %}
+        </span></strong>
+      </div>
+      
+    </form>
+
+
+  </div>
 
 {% endblock content %}
