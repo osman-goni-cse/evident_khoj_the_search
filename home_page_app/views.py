@@ -1,4 +1,6 @@
+import json
 from django.shortcuts import render
+from home_page_app.models import StoreNumber
  
 def BinarySearch(numberList, target):  
   low = 0  
@@ -36,8 +38,14 @@ def home_page_view(request):
     numberList = [int(i) for i in numberList]
     numberList = sorted(numberList, reverse=True) 
 
+    StoreNumber.objects.create(
+      user=request.user,
+      numberList=json.dumps(numberList)
+    )
 
     result = BinarySearch(numberList, int(searchValue))
+
+
     # print(result)
     return render(request, 'home.html', context={'result':result})
 

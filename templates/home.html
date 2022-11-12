@@ -6,6 +6,7 @@
 
 {% block content %}
 
+  {% if request.user.is_authenticated %}
   <div class="container">
     
     <form action="" method="POST" class="w-50 mx-auto mt-3"> 
@@ -30,5 +31,6 @@
 
 
   </div>
+  {% endif %}
 
 {% endblock content %}
