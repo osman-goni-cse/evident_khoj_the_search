@@ -1,0 +1,19 @@
+
+<header>
+  <nav class="container">
+    <h2 class="fw-bold">Ami Coding Pari Na</h2>
+    <ul>
+      {% comment %} <li><a href="/" class="btn btn-default fw-bold">Home</a></li> {% endcomment %}
+      
+      {% if request.user.is_authenticated %}
+        <span class="text-primary">Hello {{request.user.username}}</span>
+        <li><a href="/accounts/logout/" class="btn btn-default fw-bold">Logout</a></li>
+      {% else %}
+        <li><a href="/accounts/register/" class="btn btn-default fw-bold">Sign Up</a></li>
+        <li><a href="/accounts/login/" class="btn btn-default fw-bold">Login</a></li>
+      {% endif %}
+      
+    </ul>
+  </nav>
+  
+</header>
